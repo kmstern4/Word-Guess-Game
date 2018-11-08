@@ -6,6 +6,8 @@ var game = {
     guesses: 12,
     already: " ",
     wordsIndex: 0,
+    spreadWord: "",
+    dashes: "",
 
     shuffle: function(array) {
         var i = array.length, j = 0, temp;
@@ -19,10 +21,36 @@ var game = {
     },
 
     renderWord: function() {
-        if (game.wordsIndex <= (game.words.length - 1)) {
-            document.getElementById("currentWordText").innerHTML = game.words[game.wordsIndex];
+        if (this.wordsIndex <= (this.words.length - 1)) {
+            // document.getElementById("currentWordText").innerHTML = this.words[this.wordsIndex];
+            this.currentWord = this.words[this.wordsIndex];
+            console.log("current word: " + this.currentWord)
         }
+    },
+
+    updateScore: function() {
+        document.getElementById("scoreText").innerHTML = this.score;
+    },
+
+    updateGuesses: function() {
+        document.getElementById("guessesText").innerHTML = this.guesses;
+    },
+
+    characterize: function() {
+        var str = this.currentWord;
+        this.spreadWord = [...str];
+        console.log(this.spreadWord);
+    },
+
+    createDashes: function() {
+        this.dashes = [];
+        for (var i = 0; i < this.spreadWord.length; i++) {
+            this.dashes.push("-  ");
+        }
+        document.getElementById("currentWordText").innerHTML = this.dashes.join("");
+        console.log(this.dashes);
     }
+
 
 };
 
@@ -33,6 +61,10 @@ game.shuffle(game.words);
 console.log(game.words);
 
 game.renderWord();
+game.updateScore();
+game.updateGuesses();
+game.characterize();
+game.createDashes();
 
 //begin with user input
 document.onkeyup = function(event) {
