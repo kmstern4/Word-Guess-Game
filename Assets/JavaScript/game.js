@@ -8,6 +8,7 @@ var game = {
     wordsIndex: 0,
     spreadWord: "",
     dashes: [],
+    correct: [],
 
     shuffle: function(array) {
         var i = array.length, j = 0, temp;
@@ -22,7 +23,6 @@ var game = {
 
     renderWord: function() {
         if (this.wordsIndex <= (this.words.length - 1)) {
-            // document.getElementById("currentWordText").innerHTML = this.words[this.wordsIndex];
             this.currentWord = this.words[this.wordsIndex];
             console.log("current word: " + this.currentWord)
         }
@@ -57,6 +57,20 @@ var game = {
         document.getElementById("alreadyText").innerHTML = this.already.join(" ");
     },
 
+    addCorrect: function() {
+        var userInput = event.key.toLowerCase();
+        this.correct.push(userInput);
+        console.log(this.correct);
+    },
+
+    revealLetter: function () {
+        var userInput = event.key.toLowerCase();
+        var charIndex = game.spreadWord.indexOf(userInput);
+        this.dashes[charIndex] = this.spreadWord[charIndex];
+        console.log(this.dashes);
+        document.getElementById("currentWordText").innerHTML = this.dashes.join("");
+    }
+
 
 };
 
@@ -86,9 +100,11 @@ document.onkeyup = function(event) {
         game.guesses--;
         game.updateGuesses();
     }
-    else {
-        console.log("woooooord");
+    else if (game.spreadWord.indexOf(userInput) > -1 && game.correct.indexOf(userInput) < 0) {
+        game.addCorrect();
+        game.revealLetter();
     }
+    
 }
 
 
