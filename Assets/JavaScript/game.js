@@ -1,24 +1,42 @@
-// VARIABLES
-var words = ["anemone", "barnacle", "barracuda", "dolphin", "flounder", "hammerhead", "jellyfish", "lobster", "manatee", "narwhal", "octopus", "oyster", "seahorse", "seaweed", "shipwreck", "shrimp", "stingray", "submarine", "swordfish", "tsunami"];
+//OBJECT
+var game = {
+    words: ["anemone", "barnacle", "barracuda", "dolphin", "flounder", "hammerhead", "jellyfish", "lobster", "manatee", "narwhal", "octopus", "oyster", "seahorse", "seaweed", "shipwreck", "shrimp", "stingray", "submarine", "swordfish", "tsunami"],
+    score: 0,
+    currentWord: " ",
+    guesses: 12,
+    already: " ",
+    wordsIndex: 0,
 
-var score = 0
-var currentWord = " ";
-var guesses = 12;
-var already = " ";
-var wordsIndex = 0;
+    shuffle: function(array) {
+        var i = array.length, j = 0, temp;
+        while (i--) {
+            j = Math.floor(Math.random() * (i+1));
+            temp = array[i];
+            array[i] = array[j];
+            array [j] = temp;
+        }
+        return array;
+    }
 
+};
 
 
 // FUNCTIONS
+//use fisher-yates shuffle to shuffle array at the start FUNCTION SHOULD NOT REPEAT
+game.shuffle(game.words);
+console.log(game.words);
 
-//updates score
-function updateScore() {
-    document.getElementById("scoreText").innerHTML = score;
+//begin with user input
+document.onkeyup = function(event) {
+    if (game.score == 20) {
+        alert("You guessed all the words!");
+        return;
+    }
+    var userInput = event.key.toLowerCase();
 }
-//updates remaining guesses
-function updateGuesses() {
-    document.getElementById("guessesText").innerHTML = guesses;
-}
+
+
+
 
 
 
@@ -34,6 +52,5 @@ function updateGuesses() {
 
 //when full word is guessed, score increases, sound plays, new word is chosen
 
-document.onkeyup = function(event) {
-    var userInput = event.key.toLowerCase;
-}
+
+
