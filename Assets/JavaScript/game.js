@@ -16,6 +16,12 @@ var game = {
             array [j] = temp;
         }
         return array;
+    },
+
+    renderWord: function() {
+        if (game.wordsIndex <= (game.words.length - 1)) {
+            document.getElementById("currentWordText").innerHTML = game.words[game.wordsIndex];
+        }
     }
 
 };
@@ -26,10 +32,12 @@ var game = {
 game.shuffle(game.words);
 console.log(game.words);
 
+game.renderWord();
+
 //begin with user input
 document.onkeyup = function(event) {
-    if (game.score == 20) {
-        alert("You guessed all the words!");
+    if (game.wordIndex == 20) {
+        alert("There are no more words to guess!");
         return;
     }
     var userInput = event.key.toLowerCase();
