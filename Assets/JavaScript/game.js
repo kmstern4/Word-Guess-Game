@@ -2,7 +2,7 @@
 var game = {
     words: ["anemone", "barnacle", "barracuda", "dolphin", "flounder", "hammerhead", "jellyfish", "lobster", "manatee", "narwhal", "octopus", "oyster", "seahorse", "seaweed", "shipwreck", "shrimp", "stingray", "submarine", "swordfish", "tsunami"],
     score: 0,
-    currentWord: " ",
+    currentWord: "",
     guesses: 12,
     already: [],
     wordsIndex: 0,
@@ -54,6 +54,7 @@ var game = {
         var userInput = event.key.toLowerCase();
         this.already.push(userInput);
         console.log(this.already);
+        document.getElementById("alreadyText").innerHTML = this.already.join(" ");
     },
 
 
@@ -79,9 +80,11 @@ document.onkeyup = function(event) {
     }
     var userInput = event.key.toLowerCase();
 
-    if (game.spreadWord.indexOf(userInput) < 0) {
+    if (game.spreadWord.indexOf(userInput) < 0 && game.already.indexOf(userInput) < 0)  {
         console.log("not in word");
         game.addAlready();
+        game.guesses--;
+        game.updateGuesses();
     }
     else {
         console.log("woooooord");
