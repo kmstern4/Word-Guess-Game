@@ -4,10 +4,10 @@ var game = {
     score: 0,
     currentWord: " ",
     guesses: 12,
-    already: " ",
+    already: [],
     wordsIndex: 0,
     spreadWord: "",
-    dashes: "",
+    dashes: [],
 
     shuffle: function(array) {
         var i = array.length, j = 0, temp;
@@ -43,13 +43,18 @@ var game = {
     },
 
     createDashes: function() {
-        this.dashes = [];
         for (var i = 0; i < this.spreadWord.length; i++) {
             this.dashes.push("-  ");
         }
         document.getElementById("currentWordText").innerHTML = this.dashes.join("");
         console.log(this.dashes);
-    }
+    },
+
+    addAlready: function() {
+        var userInput = event.key.toLowerCase();
+        this.already.push(userInput);
+        console.log(this.already);
+    },
 
 
 };
@@ -73,6 +78,14 @@ document.onkeyup = function(event) {
         return;
     }
     var userInput = event.key.toLowerCase();
+
+    if (game.spreadWord.indexOf(userInput) < 0) {
+        console.log("not in word");
+        game.addAlready();
+    }
+    else {
+        console.log("woooooord");
+    }
 }
 
 
