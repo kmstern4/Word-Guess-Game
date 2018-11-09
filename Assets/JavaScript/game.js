@@ -57,6 +57,10 @@ var game = {
         document.getElementById("alreadyText").innerHTML = this.already.join(" ");
     },
 
+    updateAlready: function() {
+        document.getElementById("alreadyText").innerHTML = this.already.join("");
+    },
+
     addCorrect: function() {
         var userInput = event.key.toLowerCase();
         this.correct.push(userInput);
@@ -88,17 +92,18 @@ var game = {
         this.characterize();
         this.createDashes();
         this.updateScore();
+        this.updateAlready();
     },
 
     winCondition: function() {
         if (game.guesses == 0) {  
-            alert("You have no more guesses! You lose this round!");
+            alert("You have no more guesses! You lose this round. The word was " + this.currentWord + "!");
             game.wordsIndex++;
             this.startGame();
         }
     
         if (game.dashes.toString() === game.spreadWord.toString()) {
-            alert("You correctly guessed the word!");
+            alert("You correctly guessed " + this.currentWord + "!");
             game.wordsIndex++;
             game.score++;
             this.startGame();
