@@ -53,14 +53,14 @@ var game = {
     addAlready: function() {
         var userInput = event.key.toLowerCase();
         this.already.push(userInput);
-        console.log(this.already);
+        // console.log(this.already);
         document.getElementById("alreadyText").innerHTML = this.already.join(" ");
     },
 
     addCorrect: function() {
         var userInput = event.key.toLowerCase();
         this.correct.push(userInput);
-        console.log(this.correct);
+        // console.log(this.correct);
     },
 
     revealLetter: function () { 
@@ -69,10 +69,9 @@ var game = {
             if (this.spreadWord[i] == userInput) {
                 this.dashes[i] = userInput;
             }
-            console.log(this.dashes);
+            // console.log(this.dashes);
             document.getElementById("currentWordText").innerHTML = this.dashes.join("");
         }
-        this.winCondition ();
         
 
     },
@@ -91,7 +90,7 @@ var game = {
         this.updateScore();
     },
 
-    winCondition: function () {
+    winCondition: function() {
         if (game.guesses == 0) {  
             alert("You have no more guesses! You lose this round!");
             game.wordsIndex++;
@@ -141,7 +140,8 @@ document.onkeyup = function(event) {
     else if (game.spreadWord.indexOf(userInput) > -1 && game.correct.indexOf(userInput) < 0) {
         game.addCorrect();
         game.revealLetter();
-    }
+        game.winCondition();
+    };
     
 }
 

@@ -1,4 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 body {
-    background: black;
-    color: white;
+	background-color: #181B28;
+}
+
+.title {
+	font-family: "Montserrat";
+	text-align: center;
+	color: #FFF;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 35vh;
+	letter-spacing: 1px;
+}
+
+h1 {
+	background-image: url(https://media.giphy.com/media/26u4qc1rUkz8Ic2wo/giphy.gif);
+	background-size: cover;
+	color: transparent;
+	-moz-background-clip: text;
+	-webkit-background-clip: text;
+	text-transform: uppercase;
+	font-size: 120px;
+	line-height: .75;
+	margin: 10px 0;
+}
+
+
+
+
+.container {
+    color: #0197f2;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Montserrat";
+    font-size: 20px;
+    line-height: 10px;
+}
+
+#lineOne {
+    font-size: 25px;
+}
+
+#scoreText, #alreadyText, #currentWordText, #guessesText {
+    color: #75d3ff;
+    font-family: "Esteban";
+}
+
+#currentWordText {
+    font-size: 50px;
 }

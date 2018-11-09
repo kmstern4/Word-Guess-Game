@@ -4,18 +4,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ocean Word Guess</title>
+        <link href="https://fonts.googleapis.com/css?family=Esteban" rel="stylesheet">
         <link href="Assets/CSS/style.css" type="text/css" rel="stylesheet">    
     </head>
 
     <body>
-
-        <h1>Guess the Word Under the Sea!</h1>
+        <div class="title">
+            <h1>word guess<br/>under the sea</h1>
+        </div>
+        
 
         <div class="container">
-            <p>Press any key to get started!</p>
-            <p>Wins: <span id="scoreText"></span></p>
+            <p id="lineOne">Press any key to get started!</p>
+            <p>Wins: <span id="scoreText"></span></p><br>
             <p>Current Word: </p>
-            <p id="currentWordText"></p>
+            <p id="currentWordText"></p><br>
             <p>Number of guesses remaining: </p>
             <p id="guessesText"></p>
             <p>Letters already guessed: </p>
