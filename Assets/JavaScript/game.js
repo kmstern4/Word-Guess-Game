@@ -3,7 +3,7 @@ var game = {
     words: ["anemone", "barnacle", "barracuda", "dolphin", "flounder", "hammerhead", "jellyfish", "lobster", "manatee", "narwhal", "octopus", "oyster", "seahorse", "seaweed", "shipwreck", "shrimp", "stingray", "submarine", "swordfish", "tsunami"],
     score: 0,
     currentWord: "",
-    guesses: 12,
+    guesses: 8,
     already: [],
     wordsIndex: 0,
     spreadWord: "",
@@ -63,35 +63,72 @@ var game = {
         console.log(this.correct);
     },
 
-    revealLetter: function () {
+    revealLetter: function () { 
         var userInput = event.key.toLowerCase();
-        var charIndex = game.spreadWord.indexOf(userInput);
-        this.dashes[charIndex] = this.spreadWord[charIndex];
-        console.log(this.dashes);
-        document.getElementById("currentWordText").innerHTML = this.dashes.join("");
-    }
+        for (i=0; i < this.spreadWord.length; i++) {
+            if (this.spreadWord[i] == userInput) {
+                this.dashes[i] = userInput;
+            }
+            console.log(this.dashes);
+            document.getElementById("currentWordText").innerHTML = this.dashes.join("");
+        }
+        this.winCondition ();
+        
 
+    },
+
+    startGame: function () {
+        this.currentWord = "";
+        this.guesses = 8;
+        this.already = [];
+        this.spreadWord = "";
+        this.dashes = [];
+        this.correct = [];
+        this.renderWord();
+        this.updateGuesses();
+        this.characterize();
+        this.createDashes();
+        this.updateScore();
+    },
+
+    winCondition: function () {
+        if (game.guesses == 0) {  
+            alert("You have no more guesses! You lose this round!");
+            game.wordsIndex++;
+            this.startGame();
+        }
+    
+        if (game.dashes.toString() === game.spreadWord.toString()) {
+            alert("You correctly guessed the word!");
+            game.wordsIndex++;
+            game.score++;
+            this.startGame();
+        }
+    },
 
 };
 
 
 // FUNCTIONS
-//use fisher-yates shuffle to shuffle array at the start FUNCTION SHOULD NOT REPEAT
+//use fisher-yates shuffle to shuffle array at the start; do not repeat this function
 game.shuffle(game.words);
 console.log(game.words);
 
-game.renderWord();
-game.updateScore();
-game.updateGuesses();
-game.characterize();
-game.createDashes();
+game.startGame();
+
+
 
 //begin with user input
 document.onkeyup = function(event) {
-    if (game.wordIndex == 20) {
+    if (game.wordsIndex == game.words.length) {
         alert("There are no more words to guess!");
         return;
     }
+
+    
+
+    
+
     var userInput = event.key.toLowerCase();
 
     if (game.spreadWord.indexOf(userInput) < 0 && game.already.indexOf(userInput) < 0)  {
@@ -99,6 +136,7 @@ document.onkeyup = function(event) {
         game.addAlready();
         game.guesses--;
         game.updateGuesses();
+        game.winCondition();
     }
     else if (game.spreadWord.indexOf(userInput) > -1 && game.correct.indexOf(userInput) < 0) {
         game.addCorrect();
