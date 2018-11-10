@@ -24,7 +24,7 @@ var game = {
     renderWord: function() {
         if (this.wordsIndex <= (this.words.length - 1)) {
             this.currentWord = this.words[this.wordsIndex];
-            console.log("current word: " + this.currentWord)
+            console.log("current word: " + this.currentWord);
         }
     },
 
