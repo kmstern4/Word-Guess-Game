@@ -130,7 +130,6 @@ document.onkeyup = function(event) {
     var userInput = event.key.toLowerCase();
 
     if (game.spreadWord.indexOf(userInput) < 0 && game.already.indexOf(userInput) < 0)  {
-        console.log("not in word");
         game.addAlready();
         game.guesses--;
         game.updateGuesses();
