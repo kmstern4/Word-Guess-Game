@@ -24,7 +24,6 @@ var game = {
     renderWord: function() {
         if (this.wordsIndex <= (this.words.length - 1)) {
             this.currentWord = this.words[this.wordsIndex];
-            console.log("current word: " + this.currentWord);
         }
     },
 
@@ -39,7 +38,6 @@ var game = {
     characterize: function() {
         var str = this.currentWord;
         this.spreadWord = [...str];
-        console.log(this.spreadWord);
     },
 
     createDashes: function() {
@@ -47,13 +45,11 @@ var game = {
             this.dashes.push("-  ");
         }
         document.getElementById("currentWordText").innerHTML = this.dashes.join("");
-        console.log(this.dashes);
     },
 
     addAlready: function() {
         var userInput = event.key.toLowerCase();
         this.already.push(userInput);
-        // console.log(this.already);
         document.getElementById("alreadyText").innerHTML = this.already.join(" ");
     },
 
@@ -64,7 +60,6 @@ var game = {
     addCorrect: function() {
         var userInput = event.key.toLowerCase();
         this.correct.push(userInput);
-        // console.log(this.correct);
     },
 
     revealLetter: function () { 
@@ -73,7 +68,6 @@ var game = {
             if (this.spreadWord[i] == userInput) {
                 this.dashes[i] = userInput;
             }
-            // console.log(this.dashes);
             document.getElementById("currentWordText").innerHTML = this.dashes.join("");
         }
         
