@@ -47,8 +47,8 @@ var game = {
         document.getElementById("currentWordText").innerHTML = this.dashes.join("");
     },
 
-    addAlready: function() {
-        var userInput = event.key.toLowerCase();
+    addAlready: function(letter) {
+        var userInput = letter;
         this.already.push(userInput);
         document.getElementById("alreadyText").innerHTML = this.already.join(" ");
     },
@@ -57,13 +57,13 @@ var game = {
         document.getElementById("alreadyText").innerHTML = this.already.join("");
     },
 
-    addCorrect: function() {
-        var userInput = event.key.toLowerCase();
+    addCorrect: function(letter) {
+        var userInput = letter;
         this.correct.push(userInput);
     },
 
-    revealLetter: function () { 
-        var userInput = event.key.toLowerCase();
+    revealLetter: function (letter) { 
+        var userInput = letter;
         for (i=0; i < this.spreadWord.length; i++) {
             if (this.spreadWord[i] == userInput) {
                 this.dashes[i] = userInput;
@@ -130,14 +130,14 @@ document.onkeyup = function(event) {
     var userInput = event.key.toLowerCase();
 
     if (game.spreadWord.indexOf(userInput) < 0 && game.already.indexOf(userInput) < 0)  {
-        game.addAlready();
+        game.addAlready(userInput);
         game.guesses--;
         game.updateGuesses();
         game.winCondition();
     }
     else if (game.spreadWord.indexOf(userInput) > -1 && game.correct.indexOf(userInput) < 0) {
-        game.addCorrect();
-        game.revealLetter();
+        game.addCorrect(userInput);
+        game.revealLetter(userInput);
         game.winCondition();
     };
     
